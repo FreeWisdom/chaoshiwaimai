@@ -7,7 +7,7 @@
       </div>
       <img
         class="header__avatar"
-        src="http://www.dell-lee.com/imgs/avatar.jpg"
+        src="https://images.pexels.com/photos/4134548/pexels-photo-4134548.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
       />
     </div>
     <div class="list">
@@ -31,7 +31,7 @@ import Docker from '../../components/Docker'
 const useUserEffect = () => {
   const userInfo = reactive({ _id: '', username: '' })
    const getUserInfo = async () => {
-    const result = await get('/api/user/info')
+    const result = await get('https://www.fastmock.site/mock/d7d4ae13a32381377d7b29091f0d948e/cswm/user/info')
     if(result?.errno === 0 && result?.data) {
       const { _id, username } = result.data
       userInfo._id = _id || ''

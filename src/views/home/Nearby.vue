@@ -19,7 +19,7 @@ import ShopInfo from '../../components/ShopInfo'
 const useNearbyListEffect = () => {
   const nearbyList = ref([]);
   const getNearbyList = async () => {
-    const result = await get('/api/shop/hot-list')
+    const result = await get('https://www.fastmock.site/mock/d7d4ae13a32381377d7b29091f0d948e/cswm/shop/hot-list')
     if (result?.errno === 0 && result?.data?.length) {
       nearbyList.value = result.data
     }

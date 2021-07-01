@@ -1,7 +1,7 @@
 <template>
   <div class="position">
     <span class="iconfont position__icon">&#xe619;</span>
-    北京理工大学国防科技园2号楼10层
+    杭州市西湖区翠苑二区19-02-03
     <span class="iconfont position_notice">&#xe60b;</span>
   </div>
   <div class="search">

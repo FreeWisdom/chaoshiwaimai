@@ -4,5 +4,5 @@
 // 4. 后端重启后端服务
 // * 容易出问题的就是下面的配置
 module.exports = {
-  publicPath: '/jingdong'
+  publicPath: '/cswm'
 }
