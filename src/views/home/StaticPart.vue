@@ -56,10 +56,12 @@ export default {
 @import '../../style/mixins.scss';
 .position {
   position: relative;
-  padding: .16rem .24rem .16rem 0;
+  margin: .16rem 0 .16rem 0;
+  padding-right: .24rem;
   line-height: .22rem;
+  height: .22rem;
   font-size: .16rem;
-  @include ellipsis;
+  @include ellipsis(100%, 1);
   .position__icon {
     position: relative;
     top: .01rem;
@@ -68,7 +70,7 @@ export default {
   .position_notice {
     position: absolute;
     right: 0;
-    top: .17rem;
+    top: .02rem;
     font-size: .2rem;
   }
   color: $content-fontcolor;

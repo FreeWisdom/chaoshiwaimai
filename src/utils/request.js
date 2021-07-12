@@ -36,8 +36,8 @@ export const patch = (url, data = {}) => {
         'Content-Type': 'application/json'
       }
     }).then(response => {
-        resolve(response.data)
-      }).catch(err => {
+      resolve(response.data)
+    }).catch(err => {
       reject(err)
     })
   })

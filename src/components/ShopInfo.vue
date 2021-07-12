@@ -1,6 +1,6 @@
 <template>
   <div class="shop">
-    <img :src="item.imgUrl" class="shop__img">
+      <img :src="item.imgUrl" class="shop__img">
     <div
       :class="{'shop__content': true, 'shop__content--bordered': hideBorder ? false: true}"
     >
@@ -24,6 +24,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../style/viriables.scss';
+@import '../style/mixins.scss';
 .shop {
   display: flex;
   padding-top: .12rem;
@@ -36,7 +37,8 @@ export default {
     flex: 1;
     padding-bottom: .12rem;
     &--bordered {
-      border-bottom: .01rem solid $content-bgColor;
+      // border-bottom: .01rem solid $content-bgColor;
+      @include thinBorder(1px, bottom, #bebebe, 0.9, before)
     }
     &__title {
       line-height: .22rem;
