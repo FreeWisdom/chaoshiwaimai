@@ -12,109 +12,95 @@
 }
 
 /**
+* 原理：
+* 主要是通过给目标元素添加position:relative;
+* 然后再用其伪类:after或者:before画一个2倍或者3倍宽高的元素;
+* 然后给伪类元素画一个1px的边框;
+* 通过media query决定缩放伪类元素到1/2或者1/3;
+* 给伪类元素增加pointer-events: none;, 这样伪类元素可以点击穿透, 也就是能看到, 但是不触发任何默认事件(click等);
+* 
 * 真.1px边框
 * {List}: 多个方向边框, 默认值为bottom, 你可以根据需要传入(top, left, bottom, right) 4个方向;
-* {Color} 边框的颜色, 默认#ccc;
-* {List} 4个圆角半径, 默认0;
+* {Color} 边框的颜色, 默认 #ccc;
+* {List} 4个圆角半径, 默认 0px;
 * {String} 一个高级设置, 一般都不需要改动, 由于细边框的实现使用了css的伪类, 所以为了规避可能出现的样式冲突, 我们可以自己指定使用:after还是:before, 默认after;
 */
-@mixin thinBorder(
-  $width: 1px,
-  $directionMaps: bottom,
-  $color: rgb(8, 8, 8),
-  $radius: (
-    0,
-    0,
-    0,
-    0
-  ),
-  $position: after
-) {
+@mixin border1px($width: 1px, $directionMaps: bottom, $color: #ccc, $radius:(0, 0, 0, 0), $position: after) {
   // 是否只有一个方向
   $isOnlyOneDir: string==type-of($directionMaps);
 
   @if ($isOnlyOneDir) {
-    $directionMaps: ($directionMaps);
+      $directionMaps: ($directionMaps);
   }
 
   @each $directionMap in $directionMaps {
-    border-#{$directionMap}: 1px solid $color;
+      border-#{$directionMap}: $width solid $color;
   }
 
   // 判断圆角是list还是number
-  @if (list==type-of($radius)) {
-    border-radius: nth($radius, 1)
-      nth($radius, 2)
-      nth($radius, 3)
-      nth($radius, 4);
-  } @else {
-    border-radius: $radius;
+  @if(list==type-of($radius)) {
+      border-radius: nth($radius, 1) nth($radius, 2) nth($radius, 3) nth($radius, 4);
+  }
+
+  @else {
+      border-radius: $radius;
   }
 
   @media only screen and (-webkit-min-device-pixel-ratio: 2) {
-    & {
-      position: relative;
+      & {
+          position: relative;
 
-      // 删除1像素密度比下的边框
-      @each $directionMap in $directionMaps {
-        border-#{$directionMap}: none;
-      }
-    }
-
-    &:#{$position} {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 200%;
-      height: 200%;
-      transform: scale(0.5);
-      box-sizing: border-box;
-      padding: 1px;
-      transform-origin: 0 0;
-      pointer-events: none;
-      border: 0 solid $color;
-
-      @each $directionMap in $directionMaps {
-        border-#{$directionMap}-width: $width;
+          // 删除1像素密度比下的边框
+          @each $directionMap in $directionMaps {
+              border-#{$directionMap}: none;
+          }
       }
 
-      // 判断圆角是list还是number
-      @if (list==type-of($radius)) {
-        border-radius: nth($radius, 1) *
-          2
-          nth($radius, 2) *
-          2
-          nth($radius, 3) *
-          2
-          nth($radius, 4) *
-          2;
-      } @else {
-        border-radius: $radius * 2;
+      &:#{$position} {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: block;
+          width: 200%;
+          height: 200%;
+          transform: scale(0.5);
+          box-sizing: border-box;
+          padding: $width;
+          transform-origin: 0 0;
+          pointer-events: none;
+          border: 0 solid $color;
+
+          @each $directionMap in $directionMaps {
+              border-#{$directionMap}-width: $width;
+          }
+
+          // 判断圆角是list还是number
+          @if(list==type-of($radius)) {
+              border-radius: nth($radius, 1)*2 nth($radius, 2)*2 nth($radius, 3)*2 nth($radius, 4)*2;
+          }
+
+          @else {
+              border-radius: $radius*2;
+          }
       }
-    }
   }
 
   @media only screen and (-webkit-min-device-pixel-ratio: 3) {
-    &:#{$position} {
-      // 判断圆角是list还是number
-      @if (list==type-of($radius)) {
-        border-radius: nth($radius, 1) *
-          3
-          nth($radius, 2) *
-          3
-          nth($radius, 3) *
-          3
-          nth($radius, 4) *
-          3;
-      } @else {
-        border-radius: $radius * 3;
-      }
+      &:#{$position} {
 
-      width: 300%;
-      height: 300%;
-      transform: scale(0.3333);
-    }
+          // 判断圆角是list还是number
+          @if(list==type-of($radius)) {
+              border-radius: nth($radius, 1)*3 nth($radius, 2)*3 nth($radius, 3)*3 nth($radius, 4)*3;
+          }
+
+          @else {
+              border-radius: $radius*3;
+          }
+
+          width: 300%;
+          height: 300%;
+          transform: scale(0.3333);
+      }
   }
 }

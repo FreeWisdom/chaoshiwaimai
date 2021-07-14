@@ -38,7 +38,7 @@ export default {
     padding-bottom: .12rem;
     &--bordered {
       // border-bottom: .01rem solid $content-bgColor;
-      @include thinBorder(1px, bottom, #bebebe, 0.9, before)
+      @include border1px(1px, (bottom), #bebebe, 0.9, before)
     }
     &__title {
       line-height: .22rem;

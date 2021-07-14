@@ -60,7 +60,11 @@ export default {
   }
 }
 </script>
-
+<style>
+  html {
+    font-size: 90px
+  }
+</style>
 <style lang="scss" scoped>
 @import '../../style/viriables.scss';
 .wrapper {

@@ -67,7 +67,7 @@ const useTabEffect = () => {
 const useCurrentListEffect = (currentTab, shopId) => {
   const content = reactive({ list: [] })
   const getContentData = async () => {
-    const result = await get(`/api/shop/${shopId}/products`, {
+    const result = await get(`https://www.fastmock.site/mock/d7d4ae13a32381377d7b29091f0d948e/cswm/api/shop/${shopId}/products`, {
       tab: currentTab.value
     })
     if(result?.errno === 0 && result?.data?.length) {
@@ -147,7 +147,8 @@ export default {
     display: flex;
     padding: .12rem 0;
     margin: 0 .16rem;
-    border-bottom: .01rem solid $content-bgColor;
+    // border-bottom: .01rem solid $content-bgColor;
+    @include border1px(1px, (bottom), $content-bgColor, 1px, before);
     &__detail {
       overflow: hidden;
     }
